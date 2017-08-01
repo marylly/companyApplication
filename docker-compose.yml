@@ -1,0 +1,55 @@
+version: "2"
+
+services:
+  web:
+   image: nginx:latest
+   mem_limit: 96m
+   ports:
+   - "8064:8889"
+   volumes:
+   - ./:/usr/share/nginx/html/employeesApp/
+   - ./config/default.conf:/etc/nginx/conf.d/site.conf
+   - ./infra/nginx/logs:/var/log/nginx/
+
+  php:
+   build:
+      context: .
+   container_name: fpmemployees
+   mem_limit: 96m
+   volumes:
+   - ./:/usr/share/nginx/html/employeesApp/
+   
+   ports:
+   - "9000:9000"
+   links:
+    - db:db
+
+  db:
+   image: mariadb:latest
+   mem_limit: 96m
+   volumes:
+    - ./infra/mariadb:/var/lib/mysql
+    - ./config/data/employees.sql:/docker-entrypoint-initdb.d/base.sql
+   environment:
+    MYSQL_RANDOM_ROOT_PASSWORD: 1
+    MYSQL_DATABASE: employees
+    MYSQL_USER: testeemployees
+    MYSQL_PASSWORD: testeemployees
+   ports:
+   - "3306:3306"
+
+  pma:
+   image: phpmyadmin/phpmyadmin
+   mem_limit: 96m
+   environment:
+    PMA_ARBITRARY: 1
+    PMA_HOST: db
+    PMA_USER: testeemployees
+    PMA_PASSWORD: testeemployees
+    PHP_UPLOAD_MAX_FILESIZE: 1G
+    PHP_MAX_INPUT_VARS: 1G
+   restart: always
+   ports:
+   - "8001:80"
+   volumes:
+   - ./infra/pma/sessions:/sessions

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)#/available -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Funcionários</title>
+
+    <link rel="stylesheet" href="assets/style.css">
+
+    <!-- 1. Load libraries -->
+    <!-- Polyfill for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ececec;
+        }
+        .panel{
+            background: #fff !important;
+            border: none;
+            border-radius: 0px;
+        }
+        .panel-heading{
+            font-weight: 800;
+            font-size: 18px;
+            color: #303030 !important;
+        }
+        .no-padding{
+            padding: 0 !important;
+        }
+        .btn-edit{
+            margin-right: 5px;
+        }
+        .copy{
+            position: absolute;
+            bottom: 30px;
+            color: #404040;
+        }
+        .copy span{
+            color:#2b669a;
+            font-weight: 700;
+        }
+        .navbar .navbar-nav {
+            display: inline-block;
+            float: none;
+        }
+        .navbar .navbar-collapse {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body cz-shortcut-listen="true">
+    <app>Loading...</app>
+    
+    <!-- library -->
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+</body>
+</html>

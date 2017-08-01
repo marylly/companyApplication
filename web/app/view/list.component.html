@@ -1,0 +1,47 @@
+<div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Funcionários
+        </div>
+
+        <div class="panel-body">
+            <div class="alert alert-success" *ngIf="infoMsg">
+                {{ infoMsg }}
+            </div>
+            <div class="alert alert-danger" *ngIf="errorMsg">
+                {{ errorMsg }}
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>Sexo</th>
+                        <th></th>
+                    </tr>
+                    <tr *ngFor="let employee of employees">
+                        <td>{{ employee.emp_no }}</td>
+                        <td>{{ employee.first_name }}</td>
+                        <td>{{ employee.last_name }}</td>
+                        <td>{{ employee.gender }}</td>
+                        <td>
+                            <a (click)="editEmployee(employee)" class="btn btn-warning btn-toolbar btn-edit">Edit</a>
+                            <form style="display: inline-block;">
+                                <button type="button" (click)="deleteEmployee(employee.emp_no)" class="btn btn-danger btn-toolbar">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <a routerLink="/form/add" class="btn btn-primary pull-right">Incluir funcionário</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

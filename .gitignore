@@ -1,0 +1,7 @@
+.vscode/
+api/vendor/
+api/.env
+api/composer.lock
+api/yarn.lock
+web/node_modules
+infra/
