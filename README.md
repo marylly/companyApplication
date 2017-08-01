@@ -1,3 +1,9 @@
+[![License](https://poser.pugx.org/components/angular-route/license)](https://packagist.org/packages/components/angular-route)
+[![Angular 2](https://img.shields.io/badge/angular-4.3.2-red.svg)](https://angular.io/docs)
+[![Laravel 5.3](https://img.shields.io/badge/laravel-5.3-orange.svg)](https://laravel.com/)
+[![npm version](https://badge.fury.io/js/%40angular%2Fcore.svg)](https://www.npmjs.com/@angular/core)
+[![node version](https://img.shields.io/badge/node-8.2-brightgreen.svg)](https://nodejs.org/en/)
+
 # Company Application Test
 Esse é um projeto de teste de uma API, construída utilizando o framework Laravel 5, utilizado para construção estruturada de aplicações Web e API (Application Programming Interface), sendo possível atualizar as informações via HTTP Request ou CRUD feitos em Angular2, CSS(bootstrap) e HTML.
 
