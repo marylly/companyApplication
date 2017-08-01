@@ -6,9 +6,13 @@ import { FormsModule }      from '@angular/forms';
 import { HttpModule }       from '@angular/http';
 //import component
 import { AppComponent } 	from '../component/app.component';
-import { ListComponent } 	from '../component/list.component';
-import { FormComponent } 	from '../component/form.component';
+import { EmployeesListComponent } 	from '../component/employeelist.component';
+import { EmployeesFormComponent } 	from '../component/employeeform.component';
 import { EmployeeService } from '../service/employee.service';
+
+import { DepartmentListComponent } 	from '../component/departmentlist.component';
+import { DepartmentFormComponent } 	from '../component/departmentform.component';
+import { DepartmentService } from '../service/department.service';
 
 @NgModule({
 	imports: [
@@ -16,19 +20,24 @@ import { EmployeeService } from '../service/employee.service';
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            {path: '', redirectTo: '/list', pathMatch: 'full'},
-            {path: 'list', component: ListComponent},
-            {path: 'form/:act', component: FormComponent},
-            {path: 'form/:act/:id', component: FormComponent}
+            {path: '', redirectTo: '/listEmployees', pathMatch: 'full'},
+            {path: 'listEmployees', component: EmployeesListComponent},
+            {path: 'formEmployees/:act', component: EmployeesFormComponent},
+            {path: 'formEmployees/:act/:id', component: EmployeesFormComponent},
+            {path: 'listDepartments', component: DepartmentListComponent},
+            {path: 'formDepartments/:act', component: DepartmentFormComponent},
+            {path: 'formDepartments/:act/:id', component: DepartmentFormComponent}
         ])
     ],
 	declarations: [
 	    AppComponent,
-        FormComponent,
-        ListComponent
+        EmployeesFormComponent,
+        EmployeesListComponent,
+        DepartmentFormComponent,
+        DepartmentListComponent
     ],
 	bootstrap: [ AppComponent ],
-    providers: [ EmployeeService ]
+    providers: [ EmployeeService, DepartmentService ]
 })
 
 export class AppModule { }

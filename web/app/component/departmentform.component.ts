@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Employee } from '../Employee';
-import { EmployeeService } from '../service/employee.service';
+import { Department } from '../Department';
+import { DepartmentService } from '../service/department.service';
 
 
 @Component({
     selector: 'form-component',
-    templateUrl: 'app/view/form.component.html'
+    templateUrl: 'app/view/departmentform.component.html'
 })
 
-export class FormComponent implements OnInit{
+export class DepartmentFormComponent implements OnInit{
     title : String = '';
-    employee : Employee;
+    department : Department;
     action : String;
     errorMsg : String;
     infoMsg : String;
@@ -22,20 +22,19 @@ export class FormComponent implements OnInit{
     constructor(
        private activeRoute : ActivatedRoute,
        private location : Location,
-       private employeeService : EmployeeService
+       private departmentService : DepartmentService
     ){ }
 
     ngOnInit(){
         this.activeRoute.params.forEach((param : Params) => {
             let act = param['act'];
             if(act == 'add'){
-                this.title = 'Adicionar Funcionário';
+                this.title = 'Adicionar Departmento';
                 this.action = 'add';
             }else{
-                let id = param['emp_no'];
-
+                let id = param.id;
                 this.selectedId = id;
-                this.title = 'Editar Funcionário';
+                this.title = 'Editar Departmento';
                 this.action = 'edit';
             }
         });
@@ -46,9 +45,9 @@ export class FormComponent implements OnInit{
     }
 
     getData(id : number) : void{
-        this.employeeService.getEmployee(id)
+        this.departmentService.getDepartment(id)
             .subscribe(
-                employees => this.employee = employees,
+                departments => this.department = departments,
                 error => console.log(error)
             );
     }
@@ -57,17 +56,14 @@ export class FormComponent implements OnInit{
         this.location.back();
     }
 
-    addEmployee(first_name : string, last_name : string, gender : string) : void{
-        first_name = first_name.trim();
-        last_name = last_name.trim();
-        gender = gender.trim();
+    addDepartment(dept_name : string) : void{
+        dept_name = dept_name.trim();
 
-        if(!first_name || !last_name || !gender){
-            this.errorMsg = 'Ada field yang belum terisi!';
+        if(!dept_name){
+            this.errorMsg = 'Verifique os dados preenchidos!';
             return;
         }
-
-        this.employeeService.storeData(first_name, last_name, gender)
+        this.departmentService.storeData(dept_name)
             .subscribe(
                 res => {
                     this.errorMsg = '';
@@ -78,24 +74,22 @@ export class FormComponent implements OnInit{
                 });
     }
 
-    editEmployee() : void{
-        let first_name = this.employee.first_name;
-        let last_name = this.employee.last_name;
-        let gender = this.employee.gender;
-        let id = this.employee.emp_no;
+    editDepartment() : void{
+        let dept_name = this.department.dept_name;
+        let id = this.department.dept_no;
 
-        if(!first_name || !last_name || !gender){
-            this.errorMsg = 'Ada field yang belum terisi!';
+        if(!name){
+            this.errorMsg = 'Verifique os dados preenchidos!';
             return;
         }
 
-        this.employeeService.updateData(id, first_name, last_name, gender)
+        this.departmentService.updateData(id, dept_name)
             .subscribe(
                 res => {
                     this.errorMsg = '';
 
                     if(JSON.parse(res).success == 'success'){
-                        this.infoMsg = 'Update data murid berhasil!';
+                        this.infoMsg = 'Atualização efetuada com sucesso!';
                     }
                 });
     }

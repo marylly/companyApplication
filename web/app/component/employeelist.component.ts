@@ -6,10 +6,10 @@ import { EmployeeService } from '../service/employee.service';
 
 @Component({
     selector: 'list-component',
-    templateUrl: 'app/view/list.component.html'
+    templateUrl: 'app/view/employeelist.component.html'
 })
 
-export class ListComponent implements OnInit{
+export class EmployeesListComponent implements OnInit{
     employees : Employee[];
     infoMsg : string;
     errorMsg : string;
@@ -32,7 +32,7 @@ export class ListComponent implements OnInit{
     }
 
     editEmployee(employee : Employee) : void{
-        let link = ['/form/edit', employee.emp_no];
+        let link = ['/formEmployees/edit', employee.emp_no];
         this.router.navigate(link);
     }
 
@@ -40,10 +40,10 @@ export class ListComponent implements OnInit{
         this.employeeService.deleteData(id)
             .subscribe(res => {
                 if (JSON.parse(res).success == 'success') {
-                    this.infoMsg = 'Data siswa berhasil dihapus!';
+                    this.infoMsg = 'Registro apagado com sucesso!';
                     this.getEmployees();
                 } else {
-                    this.errorMsg = 'Data siswa gagal dihapus!';
+                    this.errorMsg = 'Não foi possível efetuar a operação!';
                 }
             });
     }

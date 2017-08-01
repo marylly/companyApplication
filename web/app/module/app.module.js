@@ -13,9 +13,12 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 //import component
 var app_component_1 = require("../component/app.component");
-var list_component_1 = require("../component/list.component");
-var form_component_1 = require("../component/form.component");
+var employeelist_component_1 = require("../component/employeelist.component");
+var employeeform_component_1 = require("../component/employeeform.component");
 var employee_service_1 = require("../service/employee.service");
+var departmentlist_component_1 = require("../component/departmentlist.component");
+var departmentform_component_1 = require("../component/departmentform.component");
+var department_service_1 = require("../service/department.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -26,19 +29,24 @@ var AppModule = (function () {
                 http_1.HttpModule,
                 forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
-                    { path: '', redirectTo: '/list', pathMatch: 'full' },
-                    { path: 'list', component: list_component_1.ListComponent },
-                    { path: 'form/:act', component: form_component_1.FormComponent },
-                    { path: 'form/:act/:id', component: form_component_1.FormComponent }
+                    { path: '', redirectTo: '/listEmployees', pathMatch: 'full' },
+                    { path: 'listEmployees', component: employeelist_component_1.EmployeesListComponent },
+                    { path: 'formEmployees/:act', component: employeeform_component_1.EmployeesFormComponent },
+                    { path: 'formEmployees/:act/:id', component: employeeform_component_1.EmployeesFormComponent },
+                    { path: 'listDepartments', component: departmentlist_component_1.DepartmentListComponent },
+                    { path: 'formDepartments/:act', component: departmentform_component_1.DepartmentFormComponent },
+                    { path: 'formDepartments/:act/:id', component: departmentform_component_1.DepartmentFormComponent }
                 ])
             ],
             declarations: [
                 app_component_1.AppComponent,
-                form_component_1.FormComponent,
-                list_component_1.ListComponent
+                employeeform_component_1.EmployeesFormComponent,
+                employeelist_component_1.EmployeesListComponent,
+                departmentform_component_1.DepartmentFormComponent,
+                departmentlist_component_1.DepartmentListComponent
             ],
             bootstrap: [app_component_1.AppComponent],
-            providers: [employee_service_1.EmployeeService]
+            providers: [employee_service_1.EmployeeService, department_service_1.DepartmentService]
         })
     ], AppModule);
     return AppModule;

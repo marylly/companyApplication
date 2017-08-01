@@ -1,0 +1,65 @@
+<div class="col-md-6 col-md-offset-3" *ngIf="action == 'add'">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+
+        <form>
+        <div class="panel-body">
+            <div class="alert alert-success" *ngIf="infoMsg">
+                {{ infoMsg }}
+            </div>
+            <div class="alert alert-danger" *ngIf="errorMsg">
+                {{ errorMsg }}
+            </div>
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" name="dept_name" placeholder="Nome" class="form-control" #dept_name>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <button type="button" (click)="addDepartment(dept_name.value)" class="btn btn-primary">Enviar</button>
+                    <a href="#" (click)="goBack()" class="btn btn-warning">Voltar</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<div class="col-md-6 col-md-offset-3" *ngIf="action == 'edit'">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+
+        <form>
+        <div class="panel-body" *ngIf="department">
+            <div class="alert alert-success" *ngIf="infoMsg">
+                {{ infoMsg }}
+            </div>
+            <div class="alert alert-danger" *ngIf="errorMsg">
+                {{ errorMsg }}
+            </div>
+            <input type="hidden" name="id" [(ngModel)]="department.depto_no">
+
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" name="dept_name" placeholder="Nome" class="form-control" [(ngModel)]="department.dept_name">
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <button type="button" (click)="editDepartment()" class="btn btn-primary">Submit</button>
+                    <a href="#" (click)="goBack()" class="btn btn-warning">Voltar</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

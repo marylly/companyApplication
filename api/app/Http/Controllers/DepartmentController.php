@@ -4,27 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Employee;
+use App\Department;
 
-class EmployeeController extends Controller
+class DepartmentController extends Controller
 {
     public function index(){
-        $request = Employee::all();
+        $request = Department::all();
         return $request;
     }
 
-    public function show($emp_no){
-        $request = Employee::find($emp_no);
+    public function show($dept_no){
+        $request = Department::find($dept_no);
         return $request;
     }
 
     public function store(Request $req){
-        $input = $req->only('first_name', 'last_name', 'gender');
-        $last_no = DB::table('employees')->orderBy('emp_no', 'desc')->first();
-        $input['emp_no'] = (($last_no)? $last_no->emp_no: 0) + 1;
-        $input['birth_date'] = '1987-11-06';
-        $input['hire_date'] = '1987-11-06';
-        $query = Employee::create($input);
+        $input = $req->only('dept_name');
+        $last_no = DB::table('departments')->orderBy('dept_no', 'desc')->first();
+        $input['dept_no'] = (($last_no)? $last_no->dept_no: 0) + 1;
+        $query = Department::create($input);
         if($query){
             $data['success'] = 'success';
             return $data;
@@ -34,11 +32,11 @@ class EmployeeController extends Controller
         }
     }
 
-    public function update(Request $req, $emp_no){
+    public function update(Request $req, $dept_no){
         $input = $req->all();
-        $employee = Employee::where('emp_no', $emp_no);
+        $department = Department::where('dept_no', $dept_no);
 
-        $query = $employee->update($input);
+        $query = $department->update($input);
         if($query){
             $data['success'] = 'success';
             return $data;
@@ -50,9 +48,9 @@ class EmployeeController extends Controller
 
     public function destroy(Request $req){
         $input = $req->only('id');
-        $employee = Employee::find($input['id']);
+        $department = Department::find($input['id']);
 
-        $query = $employee->delete();
+        $query = $department->delete();
         if($query){
             $data['success'] = 'success';
             return $data;

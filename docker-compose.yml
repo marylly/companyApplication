@@ -1,23 +1,33 @@
 version: "2"
 
 services:
-  web:
+  web_api:
    image: nginx:latest
    mem_limit: 96m
    ports:
    - "8064:8889"
    volumes:
-   - ./:/usr/share/nginx/html/employeesApp/
+   - ./api:/usr/share/nginx/html/companyApp/
    - ./config/default.conf:/etc/nginx/conf.d/site.conf
-   - ./infra/nginx/logs:/var/log/nginx/
+   - ./infra/nginx/api/logs:/var/log/nginx/
+
+  web_angular:
+   image: nginx:latest
+   mem_limit: 96m
+   ports:
+   - "8065:8889"
+   volumes:
+   - ./web:/usr/share/nginx/html/companyApp/
+   - ./config/angular.conf:/etc/nginx/conf.d/site.conf
+   - ./infra/nginx/angular/logs:/var/log/nginx/
 
   php:
    build:
       context: .
-   container_name: fpmemployees
+   container_name: fpmcompany
    mem_limit: 96m
    volumes:
-   - ./:/usr/share/nginx/html/employeesApp/
+   - ./api:/usr/share/nginx/html/companyApp/
    
    ports:
    - "9000:9000"

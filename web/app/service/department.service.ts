@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
-import { Employee } from '../Employee';
+import { Department } from '../Department';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class EmployeeService {
-    employeeUrl : string = 'http://127.0.0.1:8081/api/v1/employees';
+export class DepartmentService {
+    departmentUrl : string = 'http://127.0.0.1:8081/api/v1/departments';
     tokenUrl : string = 'http://127.0.0.1:8081/get-token';
 
     constructor(
         private http : Http
     ){ }
 
-    getEmployees() : Observable<Employee[]> {
-        return this.http.get(this.employeeUrl)
-            .map(res => <Employee[]> res.json());
+    getDepartments() : Observable<Department[]> {
+        return this.http.get(this.departmentUrl)
+            .map(res => <Department[]> res.json());
     }
 
-    getEmployee(id : any) : Observable<Employee> {
-        let url = this.employeeUrl+'/'+id;
+    getDepartment(id : any) : Observable<Department> {
+        let url = this.departmentUrl+'/'+id;
         return this.http.get(url)
-            .map(res => <Employee> res.json());
+            .map(res => <Department> res.json());
     }
 
     getToken() : Observable<string> {
@@ -30,21 +30,20 @@ export class EmployeeService {
             .map(response => <string> response.json());
     }
 
-    storeData(first_name : string, last_name : string, gender : string) : Observable<string> {
-        let body = JSON.stringify({ first_name : first_name, last_name : last_name, gender : gender});
+    storeData(dept_name : string) : Observable<string> {
+        let body = JSON.stringify({ dept_name : dept_name});
         let headers = new Headers({'content-type' : 'application/json'});
         let options = new RequestOptions({ headers: headers});
 
-        return this.http.post(this.employeeUrl, body, options)
+        return this.http.post(this.departmentUrl, body, options)
             .map(res => (res.json()));
     }
 
-    updateData(id : number, first_name : string, last_name : string, gender : string) : Observable<string> {
-        let body = JSON.stringify({ first_name : first_name, last_name : last_name, gender : gender});
+    updateData(id : number, dept_name : string) : Observable<string> {
+        let body = JSON.stringify({ dept_name : dept_name});
         let headers = new Headers({'content-type' : 'application/json'});
         let options = new RequestOptions({ headers: headers});
-        let url = this.employeeUrl+'/'+id;
-        console.log(url);
+        let url = this.departmentUrl+'/'+id;
 
         return this.http.post(url, body, options)
             .map(res => (res.json()));
@@ -54,7 +53,7 @@ export class EmployeeService {
         let body = JSON.stringify({ id : id });
         let headers = new Headers({'content-type' : 'application/json'});
         let options = new RequestOptions({ headers : headers});
-        let url = this.employeeUrl+'/delete';
+        let url = this.departmentUrl+'/delete';
 
         return this.http.post(url, body, options)
             .map(res => (res.json()));

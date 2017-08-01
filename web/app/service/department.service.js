@@ -12,54 +12,53 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
-var EmployeeService = (function () {
-    function EmployeeService(http) {
+var DepartmentService = (function () {
+    function DepartmentService(http) {
         this.http = http;
-        this.employeeUrl = 'http://127.0.0.1:8081/api/v1/employees';
+        this.departmentUrl = 'http://127.0.0.1:8081/api/v1/departments';
         this.tokenUrl = 'http://127.0.0.1:8081/get-token';
     }
-    EmployeeService.prototype.getEmployees = function () {
-        return this.http.get(this.employeeUrl)
+    DepartmentService.prototype.getDepartments = function () {
+        return this.http.get(this.departmentUrl)
             .map(function (res) { return res.json(); });
     };
-    EmployeeService.prototype.getEmployee = function (id) {
-        var url = this.employeeUrl + '/' + id;
+    DepartmentService.prototype.getDepartment = function (id) {
+        var url = this.departmentUrl + '/' + id;
         return this.http.get(url)
             .map(function (res) { return res.json(); });
     };
-    EmployeeService.prototype.getToken = function () {
+    DepartmentService.prototype.getToken = function () {
         return this.http.get(this.tokenUrl)
             .map(function (response) { return response.json(); });
     };
-    EmployeeService.prototype.storeData = function (first_name, last_name, gender) {
-        var body = JSON.stringify({ first_name: first_name, last_name: last_name, gender: gender });
+    DepartmentService.prototype.storeData = function (dept_name) {
+        var body = JSON.stringify({ dept_name: dept_name });
         var headers = new http_1.Headers({ 'content-type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.employeeUrl, body, options)
+        return this.http.post(this.departmentUrl, body, options)
             .map(function (res) { return (res.json()); });
     };
-    EmployeeService.prototype.updateData = function (id, first_name, last_name, gender) {
-        var body = JSON.stringify({ first_name: first_name, last_name: last_name, gender: gender });
+    DepartmentService.prototype.updateData = function (id, dept_name) {
+        var body = JSON.stringify({ dept_name: dept_name });
         var headers = new http_1.Headers({ 'content-type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        var url = this.employeeUrl + '/' + id;
-        console.log(url);
+        var url = this.departmentUrl + '/' + id;
         return this.http.post(url, body, options)
             .map(function (res) { return (res.json()); });
     };
-    EmployeeService.prototype.deleteData = function (id) {
+    DepartmentService.prototype.deleteData = function (id) {
         var body = JSON.stringify({ id: id });
         var headers = new http_1.Headers({ 'content-type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        var url = this.employeeUrl + '/delete';
+        var url = this.departmentUrl + '/delete';
         return this.http.post(url, body, options)
             .map(function (res) { return (res.json()); });
     };
-    EmployeeService = __decorate([
+    DepartmentService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])
-    ], EmployeeService);
-    return EmployeeService;
+    ], DepartmentService);
+    return DepartmentService;
 }());
-exports.EmployeeService = EmployeeService;
-//# sourceMappingURL=employee.service.js.map
+exports.DepartmentService = DepartmentService;
+//# sourceMappingURL=department.service.js.map

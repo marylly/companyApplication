@@ -8,4 +8,4 @@ USER root
 WORKDIR /tmp
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
-WORKDIR /usr/share/nginx/html/employeesApp
+WORKDIR /usr/share/nginx/html/companyApp

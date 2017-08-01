@@ -13,14 +13,14 @@ var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
 var employee_service_1 = require("../service/employee.service");
-var FormComponent = (function () {
-    function FormComponent(activeRoute, location, employeeService) {
+var EmployeesFormComponent = (function () {
+    function EmployeesFormComponent(activeRoute, location, employeeService) {
         this.activeRoute = activeRoute;
         this.location = location;
         this.employeeService = employeeService;
         this.title = '';
     }
-    FormComponent.prototype.ngOnInit = function () {
+    EmployeesFormComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activeRoute.params.forEach(function (param) {
             var act = param['act'];
@@ -29,7 +29,7 @@ var FormComponent = (function () {
                 _this.action = 'add';
             }
             else {
-                var id = param['emp_no'];
+                var id = param.id;
                 _this.selectedId = id;
                 _this.title = 'Editar Funcionário';
                 _this.action = 'edit';
@@ -39,21 +39,21 @@ var FormComponent = (function () {
             this.getData(this.selectedId);
         }
     };
-    FormComponent.prototype.getData = function (id) {
+    EmployeesFormComponent.prototype.getData = function (id) {
         var _this = this;
         this.employeeService.getEmployee(id)
             .subscribe(function (employees) { return _this.employee = employees; }, function (error) { return console.log(error); });
     };
-    FormComponent.prototype.goBack = function () {
+    EmployeesFormComponent.prototype.goBack = function () {
         this.location.back();
     };
-    FormComponent.prototype.addEmployee = function (first_name, last_name, gender) {
+    EmployeesFormComponent.prototype.addEmployee = function (first_name, last_name, gender) {
         var _this = this;
         first_name = first_name.trim();
         last_name = last_name.trim();
         gender = gender.trim();
         if (!first_name || !last_name || !gender) {
-            this.errorMsg = 'Ada field yang belum terisi!';
+            this.errorMsg = 'Verifique os dados preenchidos!';
             return;
         }
         this.employeeService.storeData(first_name, last_name, gender)
@@ -64,34 +64,34 @@ var FormComponent = (function () {
             }
         });
     };
-    FormComponent.prototype.editEmployee = function () {
+    EmployeesFormComponent.prototype.editEmployee = function () {
         var _this = this;
         var first_name = this.employee.first_name;
         var last_name = this.employee.last_name;
         var gender = this.employee.gender;
         var id = this.employee.emp_no;
         if (!first_name || !last_name || !gender) {
-            this.errorMsg = 'Ada field yang belum terisi!';
+            this.errorMsg = 'Verifique os dados preenchidos!';
             return;
         }
         this.employeeService.updateData(id, first_name, last_name, gender)
             .subscribe(function (res) {
             _this.errorMsg = '';
             if (JSON.parse(res).success == 'success') {
-                _this.infoMsg = 'Update data murid berhasil!';
+                _this.infoMsg = 'Atualização efetuada com sucesso!';
             }
         });
     };
-    FormComponent = __decorate([
+    EmployeesFormComponent = __decorate([
         core_1.Component({
             selector: 'form-component',
-            templateUrl: 'app/view/form.component.html'
+            templateUrl: 'app/view/employeeform.component.html'
         }),
         __metadata("design:paramtypes", [router_1.ActivatedRoute,
             common_1.Location,
             employee_service_1.EmployeeService])
-    ], FormComponent);
-    return FormComponent;
+    ], EmployeesFormComponent);
+    return EmployeesFormComponent;
 }());
-exports.FormComponent = FormComponent;
-//# sourceMappingURL=form.component.js.map
+exports.EmployeesFormComponent = EmployeesFormComponent;
+//# sourceMappingURL=employeeform.component.js.map

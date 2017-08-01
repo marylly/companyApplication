@@ -18,11 +18,17 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'cors'], function(){
     Route::group(['prefix' => 'api/v1'], function(){
-        Route::get('employees',         'EmployeeController@index');
+        Route::get('employees',             'EmployeeController@index');
         Route::get('employees/{emp_no}',    'EmployeeController@show');
-        Route::post('employees',        'EmployeeController@store');
-        Route::post('employees/delete', 'EmployeeController@destroy');
+        Route::post('employees',            'EmployeeController@store');
+        Route::post('employees/delete',     'EmployeeController@destroy');
         Route::post('employees/{emp_no}',   'EmployeeController@update');
+
+        Route::get('departments',           'DepartmentController@index');
+        Route::get('departments/{dept_no}', 'DepartmentController@show');
+        Route::post('departments',          'DepartmentController@store');
+        Route::post('departments/delete',   'DepartmentController@destroy');
+        Route::post('departments/{dept_no}','DepartmentController@update');
     });
 });
 
